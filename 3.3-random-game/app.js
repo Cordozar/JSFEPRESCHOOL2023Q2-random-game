@@ -167,4 +167,33 @@ window.addEventListener('DOMContentLoaded', () => {
     context.textBaseline = 'middle';
     context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
   }
+
+  document.addEventListener('keydown', function (e) {
+    if (gameOver) return;
+
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      const col = e.key === 'ArrowLeft' ? tetromino.col - 1 : tetromino.col + 1;
+
+      if (isValidMove(tetromino.matrix, tetromino.row, col)) {
+        tetromino.col = col;
+      }
+    }
+
+    if (e.key === 'ArrowUp') {
+      const matrix = rotate(tetromino.matrix);
+      if (isValidMove(matrix, tetromino.row, tetromino.col)) {
+        tetromino.matrix = matrix;
+      }
+    }
+
+    if (e.key === 'ArrowDown') {
+      const row = tetromino.row + 1;
+      if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
+        tetromino.row = row - 1;
+        placeTetromino();
+        return;
+      }
+      tetromino.row = row;
+    }
+  });
 });
