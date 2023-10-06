@@ -103,5 +103,54 @@ window.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  
+  function rotate(matrix) {
+    const N = matrix.length - 1;
+    const result = matrix.map((row, i) =>
+      row.map((val, j) => matrix[N - j][i])
+    );
+    return result;
+  }
+
+  function isValidMove(matrix, cellRow, cellCol) {
+    for (let row = 0; row < matrix.length; row++) {
+      for (let col = 0; col < matrix[row].length; col++) {
+        if (
+          matrix[row][col] &&
+          (cellCol + col < 0 ||
+            cellCol + col >= playfield[0].length ||
+            cellRow + row >= playfield.length ||
+            playfield[cellRow + row][cellCol + col])
+        ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function placeTetromino() {
+    for (let row = 0; row < tetromino.matrix.length; row++) {
+      for (let col = 0; col < tetromino.matrix[row].length; col++) {
+        if (tetromino.matrix[row][col]) {
+          if (tetromino.row + row < 0) {
+            return showGameOver();
+          }
+          playfield[tetromino.row + row][tetromino.col + col] = tetromino.name;
+        }
+      }
+    }
+
+    for (let row = playfield.length - 1; row >= 0; ) {
+      if (playfield[row].every((cell) => !!cell)) {
+        for (let r = row; r >= 0; r--) {
+          for (let c = 0; c < playfield[r].length; c++) {
+            playfield[r][c] = playfield[r - 1][c];
+          }
+        }
+      } else {
+        row--;
+      }
+    }
+    tetromino = getNextTetromino();
+  }
 });
