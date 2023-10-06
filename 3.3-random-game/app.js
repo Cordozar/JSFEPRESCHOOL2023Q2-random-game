@@ -2,6 +2,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('game'),
     context = canvas.getContext('2d'),
     grid = 32;
+
   let tetrominoSequence = [],
     playfield = [];
 
@@ -66,5 +67,41 @@ window.addEventListener('DOMContentLoaded', () => {
     rAF = null,
     gameOver = false;
 
- 
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function generateSequence() {
+    const sequence = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
+
+    while (sequence.length) {
+      const rand = getRandomInt(0, sequence.length - 1);
+      const name = sequence.splice(rand, 1)[0];
+      tetrominoSequence.push(name);
+    }
+  }
+
+  function getNextTetromino() {
+    if (tetrominoSequence.length === 0) {
+      generateSequence();
+    }
+    const name = tetrominoSequence.pop();
+    const matrix = tetrominos[name];
+
+    const col = playfield[0].length / 2 - Math.ceil(matrix[0].length / 2);
+
+    const row = name === 'I' ? -1 : -2;
+
+    return {
+      name: name,
+      matrix: matrix,
+      row: row,
+      col: col,
+    };
+  }
+
+  
 });
