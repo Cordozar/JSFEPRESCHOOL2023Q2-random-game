@@ -2,16 +2,16 @@ html,
 body {
   height: 100%;
   margin: 0;
-  font-family: monospace;
   font-size: 20px;
+  font-family: monospace;
 }
 
 body {
-  background: black;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: black;
 }
 
 a {
@@ -19,11 +19,42 @@ a {
 }
 
 canvas {
+  z-index: 1;
   border: 1px solid white;
 }
 
 .tetris-container {
   position: relative;
+}
+
+.start {
+  position: absolute;
+  z-index: 10;
+  width: 50px;
+  height: 50px;
+  background-image: url('./svg/305734.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(90deg);
+  cursor: pointer;
+}
+
+.update {
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.75);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 40px);
+  padding: 10px 10px 7px 10px;
+  border-radius: 10px;
+
+  img {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
 }
 
 .score {
@@ -36,7 +67,6 @@ canvas {
 .footer {
   position: absolute;
   bottom: 0;
-  
 }
 
 .footer__flex-container {
@@ -54,9 +84,9 @@ canvas {
 .footer__link {
   position: relative;
   display: inline-block;
+  margin-right: 100px;
   margin-left: 15px;
   color: white;
-  margin-right: 100px;
 }
 
 .footer__img {
@@ -65,4 +95,12 @@ canvas {
 
 .footer__img img {
   height: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
 }

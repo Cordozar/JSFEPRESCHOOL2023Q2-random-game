@@ -220,6 +220,8 @@ window.addEventListener('DOMContentLoaded', () => {
     tetromino = getNextTetromino();
   }
 
+  const update = document.querySelector('.update');
+
   // показываем надпись Game Over
   function showGameOver() {
     // прекращаем всю анимацию игры
@@ -237,6 +239,8 @@ window.addEventListener('DOMContentLoaded', () => {
     context.textAlign = 'center';
     context.textBaseline = 'middle';
     context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
+
+    update.classList.add('show');
   }
 
   // главный цикл игры
@@ -339,7 +343,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // старт игры
-  rAF = requestAnimationFrame(loop);
+  // rAF = requestAnimationFrame(loop);
 
   const score = document.querySelector('.score-counter');
   function render() {
@@ -347,4 +351,15 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   render();
+
+  const start = document.querySelector('.start');
+
+  start.addEventListener('click', () => {
+    requestAnimationFrame(loop);
+    start.classList.add('hidden');
+  });
+
+  update.addEventListener('click', () => {
+    location.reload();
+  });
 });
