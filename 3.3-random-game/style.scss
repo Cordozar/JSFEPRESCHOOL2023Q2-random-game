@@ -1,0 +1,68 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: monospace;
+  font-size: 20px;
+}
+
+body {
+  background: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+canvas {
+  border: 1px solid white;
+}
+
+.tetris-container {
+  position: relative;
+}
+
+.score {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  color: white;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  
+}
+
+.footer__flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.footer__copyright {
+  color: white;
+}
+
+.footer__link {
+  position: relative;
+  display: inline-block;
+  margin-left: 15px;
+  color: white;
+  margin-right: 100px;
+}
+
+.footer__img {
+  height: 45px;
+}
+
+.footer__img img {
+  height: 100%;
+}
