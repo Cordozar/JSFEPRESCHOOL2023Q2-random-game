@@ -221,6 +221,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   const update = document.querySelector('.update');
+  const name = document.querySelector('input[type="text"]');
 
   // показываем надпись Game Over
   function showGameOver() {
@@ -241,6 +242,8 @@ window.addEventListener('DOMContentLoaded', () => {
     context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
 
     update.classList.add('show');
+
+    localStorage.setItem(`${name.value}`, counter);
   }
 
   // главный цикл игры
@@ -345,6 +348,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // старт игры
   // rAF = requestAnimationFrame(loop);
 
+  const scoreText = document.querySelector('.score');
   const score = document.querySelector('.score-counter');
   function render() {
     score.textContent = `${counter}`;
@@ -353,13 +357,29 @@ window.addEventListener('DOMContentLoaded', () => {
   render();
 
   const start = document.querySelector('.start');
+  const modal = document.querySelector('.name');
 
   start.addEventListener('click', () => {
-    requestAnimationFrame(loop);
     start.classList.add('hidden');
+    modal.classList.remove('hidden');
+  });
+
+  const submit = document.querySelector('input[type="submit"]');
+
+  submit.addEventListener('click', (e) => {
+    e.preventDefault();
+    const users = localStorage.users;
+    console.log(users);
+    modal.classList.add('hidden');
+    requestAnimationFrame(loop);
+    scoreText.classList.add('show');
   });
 
   update.addEventListener('click', () => {
     location.reload();
   });
+
+  // if (!localStorage.getItem('users')) {
+  //   localStorage.setItem('users', JSON.stringify({}));
+  // }
 });

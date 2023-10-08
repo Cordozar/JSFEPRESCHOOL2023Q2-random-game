@@ -10,7 +10,7 @@
 
 <body>
   <div class="tetris-container">
-    <div class="score">Score: <span class="score-counter"></span></div>
+    <div class="score hidden">Score: <span class="score-counter"></span></div>
     <canvas width="320" height="640" id="game">
     </canvas>
   </div>
@@ -18,6 +18,12 @@
   <div class="update hidden">
     <img src="./svg/1294569.svg" alt="">
   </div>
+  <form class="name hidden">
+    <div>Enter a name</div>
+    <input type="text" name="name" id="name">
+    <input type="submit" value="Enter">
+  </form>
+  
 
   <footer class="footer">
     <div class="container">
