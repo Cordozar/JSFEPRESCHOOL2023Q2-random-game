@@ -1,4 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
+  // alert('Проверяющий, саму игру писал не я, пока сам такое написать не могу. Я написал конец игры, отображение очков, таблицу результатов')
+
   // License CC0 1.0 Universal
   // https://gist.github.com/straker/3c98304f8a6a9174efd8292800891ea1
   // https://tetris.fandom.com/wiki/Tetris_Guideline
@@ -222,11 +224,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const update = document.querySelector('.update');
   const name = document.querySelector('input[type="text"]');
+  const audio = document.querySelector('.music');
+  const audioGameOver = document.querySelector('.game-over');
 
   // показываем надпись Game Over
   function showGameOver() {
     date[`${name.value}`] = counter;
     addLocalStorage();
+
+    audio.pause();
+    audioGameOver.play();
 
     // прекращаем всю анимацию игры
     cancelAnimationFrame(rAF);
@@ -372,6 +379,7 @@ window.addEventListener('DOMContentLoaded', () => {
     modal.classList.add('hidden');
     requestAnimationFrame(loop);
     scoreText.classList.add('show');
+    audio.play();
   });
 
   update.addEventListener('click', () => {
