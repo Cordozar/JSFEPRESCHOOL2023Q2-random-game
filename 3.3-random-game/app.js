@@ -225,6 +225,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // показываем надпись Game Over
   function showGameOver() {
+    date[`${name.value}`] = counter;
+    addLocalStorage();
+
     // прекращаем всю анимацию игры
     cancelAnimationFrame(rAF);
     // ставим флаг окончания
@@ -242,8 +245,6 @@ window.addEventListener('DOMContentLoaded', () => {
     context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
 
     update.classList.add('show');
-
-    localStorage.setItem(`${name.value}`, counter);
   }
 
   // главный цикл игры
@@ -368,8 +369,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   submit.addEventListener('click', (e) => {
     e.preventDefault();
-    const users = localStorage.users;
-    console.log(users);
     modal.classList.add('hidden');
     requestAnimationFrame(loop);
     scoreText.classList.add('show');
@@ -379,7 +378,53 @@ window.addEventListener('DOMContentLoaded', () => {
     location.reload();
   });
 
-  // if (!localStorage.getItem('users')) {
-  //   localStorage.setItem('users', JSON.stringify({}));
-  // }
+  const date = {};
+
+  function addLocalStorage() {
+    if (!localStorage.getItem('date')) {
+      localStorage.setItem('date', JSON.stringify({}));
+    }
+
+    const parseObj = JSON.parse(localStorage.getItem('date'));
+    parseObj[name.value] = counter;
+    const stringifyObj = JSON.stringify(parseObj);
+
+    console.log(stringifyObj);
+
+    localStorage.setItem('date', stringifyObj);
+  }
+
+  const rating = document.querySelector('.rating-btn');
+  const ratingModal = document.querySelector('.rating');
+
+  rating.addEventListener('click', () => {
+    ratingModal.classList.toggle('hidden');
+  });
+
+  function renderRating() {
+    const rating = localStorage.getItem('date');
+
+    const entries = Object.entries(JSON.parse(rating));
+
+    const sortEntries = entries.sort((a, b) => b[1] - a[1]);
+
+    console.log(sortEntries);
+
+    sortEntries.forEach((el, i) => {
+      const newElement = document.createElement('div');
+      newElement.classList.add('rating__position');
+      newElement.innerHTML = `<div class="rating__name">${i + 1}. ${el[0]}</div>
+                              <div class="rating__score">${el[1]}</div>`;
+      ratingModal.append(newElement);
+    });
+  }
+
+  renderRating();
+
+  const clearRating = document.querySelector('.rating__clear');
+
+  clearRating.addEventListener('click', () => {
+    ratingModal.innerHTML = '';
+    localStorage.clear();
+  });
 });

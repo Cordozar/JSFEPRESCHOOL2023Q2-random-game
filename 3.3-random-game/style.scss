@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-size: 20px;
   font-family: monospace;
+  color: white;
 }
 
 body {
@@ -41,18 +42,18 @@ canvas {
 
 .update {
   position: absolute;
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0.75);
-  left: 50%;
   top: 50%;
-  transform: translate(-50%, 40px);
+  left: 50%;
+  z-index: 10;
   padding: 10px 10px 7px 10px;
+  background-color: rgba(0, 0, 0, 0.75);
   border-radius: 10px;
+  transform: translate(-50%, 40px);
 
   img {
-    cursor: pointer;
     width: 50px;
     height: 50px;
+    cursor: pointer;
     object-fit: cover;
   }
 }
@@ -70,11 +71,10 @@ canvas {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid white;
   padding: 10px;
+  border: 1px solid white;
 
   div {
-    color: white;
     margin-bottom: 10px;
   }
 
@@ -82,6 +82,47 @@ canvas {
     margin-bottom: 10px;
     font-family: monospace;
   }
+}
+
+.rating-btn {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  cursor: pointer;
+}
+
+.rating {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  max-width: 200px;
+  min-height: 100px;
+  max-height: 500px;
+  padding: 10px 10px 30px;
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+}
+
+.rating__clear {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.rating__position {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating__name {
 }
 
 .footer {
@@ -95,10 +136,6 @@ canvas {
   align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
-}
-
-.footer__copyright {
-  color: white;
 }
 
 .footer__link {
