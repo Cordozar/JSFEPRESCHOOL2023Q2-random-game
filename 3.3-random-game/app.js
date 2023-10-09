@@ -1,5 +1,7 @@
 window.addEventListener('DOMContentLoaded', () => {
-  alert('Проверяющий, саму игру писал не я, пока сам такое написать не могу. Я написал конец игры, подсчет и отображение очков, рейтинг результатов, аудио. Если игра не помещается в окне можно уменьшить масштаб окна и включить полноэкранный режим (F11).')
+  // alert(
+  //   'Проверяющий, игру писал не я, пока сам такое написать не могу. Я написал конец игры, подсчет и отображение очков, рейтинг результатов, аудио. Если игра не помещается в окне можно уменьшить масштаб окна и включить полноэкранный режим (F11).'
+  // );
 
   // License CC0 1.0 Universal
   // https://gist.github.com/straker/3c98304f8a6a9174efd8292800891ea1
@@ -226,14 +228,41 @@ window.addEventListener('DOMContentLoaded', () => {
   const name = document.querySelector('input[type="text"]');
   const audio = document.querySelector('.music');
   const audioGameOver = document.querySelector('.game-over');
+  const audioBtn = document.querySelector('.volume');
+  let isVolume = false;
+
+  audio.volume = 0.5;
+  audioGameOver.volume = 0.5;
+
+  function audioPlay() {
+    audio.play();
+    isVolume = true;
+  }
+
+  function audioPause() {
+    audio.pause();
+    isVolume = false;
+  }
+
+  audioBtn.addEventListener('click', () => {
+    if (isVolume) {
+      audioPause();
+      audioBtn.classList.remove('volume-mute');
+    } else {
+      audioPlay();
+      audioBtn.classList.add('volume-mute');
+    }
+  });
 
   // показываем надпись Game Over
   function showGameOver() {
     date[`${name.value}`] = counter;
     addLocalStorage();
 
-    audio.pause();
-    audioGameOver.play();
+    if (isVolume) {
+      audio.pause();
+      audioGameOver.play();
+    }
 
     // прекращаем всю анимацию игры
     cancelAnimationFrame(rAF);
@@ -379,7 +408,6 @@ window.addEventListener('DOMContentLoaded', () => {
     modal.classList.add('hidden');
     requestAnimationFrame(loop);
     scoreText.classList.add('show');
-    audio.play();
   });
 
   update.addEventListener('click', () => {
@@ -417,6 +445,9 @@ window.addEventListener('DOMContentLoaded', () => {
     const sortEntries = entries.sort((a, b) => b[1] - a[1]);
 
     console.log(sortEntries);
+    if (sortEntries.length = 10) {
+      sortEntries.splice(sortEntries.length, 1);
+    }
 
     sortEntries.forEach((el, i) => {
       const newElement = document.createElement('div');
