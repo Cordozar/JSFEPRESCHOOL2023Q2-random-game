@@ -206,7 +206,6 @@ window.addEventListener('DOMContentLoaded', () => {
         } else if (countFilledCells === 4) {
           counter += 800;
         }
-        console.log(countFilledCells);
         render();
         // очищаем его и опускаем всё вниз на одну клетку
         for (let r = row; r >= 0; r--) {
@@ -258,6 +257,7 @@ window.addEventListener('DOMContentLoaded', () => {
   function showGameOver() {
     date[`${name.value}`] = counter;
     addLocalStorage();
+    renderRating();
 
     if (isVolume) {
       audio.pause();
@@ -425,8 +425,6 @@ window.addEventListener('DOMContentLoaded', () => {
     parseObj[name.value] = counter;
     const stringifyObj = JSON.stringify(parseObj);
 
-    console.log(stringifyObj);
-
     localStorage.setItem('date', stringifyObj);
   }
 
@@ -444,8 +442,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const sortEntries = entries.sort((a, b) => b[1] - a[1]);
 
-    console.log(sortEntries);
-    if (sortEntries.length = 10) {
+    if ((sortEntries.length = 10)) {
       sortEntries.splice(sortEntries.length, 1);
     }
 
