@@ -446,6 +446,8 @@ window.addEventListener('DOMContentLoaded', () => {
       sortEntries.splice(sortEntries.length, 1);
     }
 
+    ratingModal.innerHTML = '';
+
     sortEntries.forEach((el, i) => {
       const newElement = document.createElement('div');
       newElement.classList.add('rating__position');
@@ -457,10 +459,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   renderRating();
 
-  const clearRating = document.querySelector('.rating__clear');
+  // const clearRating = document.querySelector('.rating__clear');
 
-  clearRating.addEventListener('click', () => {
-    ratingModal.innerHTML = '';
-    localStorage.clear();
-  });
+  // clearRating.addEventListener('click', () => {
+  //   ratingModal.innerHTML = '';
+  //   localStorage.clear();
+  // });
 });
