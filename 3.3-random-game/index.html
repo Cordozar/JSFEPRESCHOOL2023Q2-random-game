@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.7">
+  <title>Тетрис</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div class="tetris-container">
+    <div class="rating-btn">Rating</div>
+    <div class="rating hidden">
+      <!-- <div class="rating__clear">Clear</div> -->
+    </div>
+    <div class="score hidden">Score: <span class="score-counter"></span></div>
+    <div class="volume"></div>
+    <canvas width="320" height="640" id="game">
+    </canvas>
+  </div>
+  <div class="start"></div>
+  <div class="update hidden">
+    <img src="./svg/1294569.svg" alt="">
+  </div>
+  <form class="name hidden">
+    <div>Enter a name</div>
+    <input type="text" name="name" id="name" maxlength="10">
+    <input type="submit" value="Enter">
+  </form>
+  <audio class="music" src="./music/03-b-type-music.mp3" loop></audio>
+  <audio class="game-over" src="./music/08-game-over.mp3"></audio>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__flex-container">
+        <span class="footer__copyright">© 2023 <a class="footer__link" target="_blank"
+            href="https://github.com/Cordozar">cordozar</a></span>
+        <div class="footer__img">
+          <a href="https://rs.school/js/" target="_blank"><img src="./svg/rss.svg" alt="rs-school"></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+<script src="./app.js"></script>
+
+</html>
